@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import {
   Mail,
   Phone,
@@ -58,15 +58,15 @@ const Contact = () => {
     },
   ];
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add your form submission logic here
     alert("Thank you, your data was submitted sucessfully!!!");
-    console.log(formData);
   };
 
   return (

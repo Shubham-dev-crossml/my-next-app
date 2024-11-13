@@ -3,12 +3,29 @@ import { boldTextStyle, btnStyle, projects } from "@/utils/constants";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 
-const Project = ({ params }: any) => {
+interface Params {
+  params: {
+    slug: string;
+  };
+}
+
+interface Project {
+  id: number;
+  name: string;
+  description: string;
+  year: {
+    from: number;
+    to: number;
+  };
+}
+
+const Project = ({ params }: Params) => {
+  console.log(params);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const project: any = projects.find(
+  const project: Project | undefined = projects.find(
     (proj) => parseInt(params.slug) === proj.id
   );
 
@@ -17,14 +34,14 @@ const Project = ({ params }: any) => {
     // params.set("name", project.name);
     // params.set("id", project.id.toString());
     const newParams = {
-      name: project.name,
-      id: project.id.toString(),
+      name: project?.name ?? "",
+      id: project?.id.toString(),
       // Add any other parameters you want to include
       timestamp: new Date().toISOString(),
     };
 
     Object.entries(newParams).forEach(([key, value]) => {
-      params.set(key, value);
+      params.set(key, value ?? "");
     });
 
     router.push(`${pathname}?${params.toString()}`);
@@ -47,15 +64,15 @@ const Project = ({ params }: any) => {
       <p>
         <span>Project Details below-</span>
         <br />
-        <span>Project Name: {project.name}</span>
+        <span>Project Name: {project?.name}</span>
         <br />
-        <span>Project Id: {project.id}</span>
+        <span>Project Id: {project?.id}</span>
         <br />
-        <span>Project Description: {project.description}</span>
+        <span>Project Description: {project?.description}</span>
         <br />
-        <span>Project Start Date: {project.year.from}</span>
+        <span>Project Start Date: {project?.year.from}</span>
         <br />
-        <span>Project End Date: {project.year.to}</span>
+        <span>Project End Date: {project?.year.to}</span>
       </p>
       <button style={btnStyle} onClick={() => router.push("/projects")}>
         Click to go back

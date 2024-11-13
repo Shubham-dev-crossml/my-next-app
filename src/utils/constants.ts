@@ -58,7 +58,7 @@ export const projects = [
     margin: "0 auto",
   }
 
-  export const boldTextStyle: any = {
+  export const boldTextStyle: React.CSSProperties = {
     fontSize: "2em",     
     fontWeight: "bold",  
     lineHeight: 1.2,    

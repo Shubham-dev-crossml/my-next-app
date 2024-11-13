@@ -48,10 +48,10 @@ const About = () => {
               transition={{ delay: 0.2 }}
               className="text-lg text-gray-700 leading-relaxed"
             >
-              Hello! I'm a Front-End Developer with 3 years of experience in
-              building responsive, user-friendly web applications. I specialize
-              in creating visually appealing and highly functional interfaces
-              that prioritize both design and performance.
+              Hello! I&apos;m a Front-End Developer with 3 years of experience
+              in building responsive, user-friendly web applications. I
+              specialize in creating visually appealing and highly functional
+              interfaces that prioritize both design and performance.
             </motion.p>
           </CardContent>
         </Card>

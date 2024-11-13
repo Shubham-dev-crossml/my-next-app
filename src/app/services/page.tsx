@@ -157,8 +157,8 @@ const Services = () => {
                 Ready to Start a Project?
               </h2>
               <p className="text-purple-100">
-                Let's collaborate to bring your ideas to life with modern web
-                solutions.
+                Let&apos;s collaborate to bring your ideas to life with modern
+                web solutions.
               </p>
             </CardContent>
           </Card>
