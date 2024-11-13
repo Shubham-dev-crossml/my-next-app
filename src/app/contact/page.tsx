@@ -1,41 +1,343 @@
-import { boldTextStyle } from "@/utils/constants";
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
+  Twitter,
+  Send,
+  MessageSquare,
+} from "lucide-react";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const contactInfo = [
+    {
+      icon: <Mail className="w-6 h-6" />,
+      title: "Email",
+      value: "shubham.shrivastav@crossml.com",
+      link: "mailto:shubham.shrivastav@crossml.com",
+    },
+    {
+      icon: <Phone className="w-6 h-6" />,
+      title: "Phone",
+      value: "+1 (555) 123-4567",
+      link: "tel:+15551234567",
+    },
+    {
+      icon: <MapPin className="w-6 h-6" />,
+      title: "Location",
+      value: "Chandigarh, CDG",
+      link: "#",
+    },
+  ];
+
+  const socialLinks = [
+    {
+      icon: <Github className="w-5 h-5" />,
+      label: "GitHub",
+      link: "https://github.com/yourusername",
+    },
+    {
+      icon: <Linkedin className="w-5 h-5" />,
+      label: "LinkedIn",
+      link: "https://linkedin.com/in/yourusername",
+    },
+    {
+      icon: <Twitter className="w-5 h-5" />,
+      label: "Twitter",
+      link: "https://twitter.com/yourusername",
+    },
+  ];
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your form submission logic here
+    alert("Thank you, your data was submitted sucessfully!!!");
+    console.log(formData);
+  };
+
   return (
-    <div style={{ padding: 15 }}>
-      <p style={boldTextStyle}>Welcome to Contact Section!!!</p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
-      quibusdam molestiae in, omnis cumque vel, magnam cum eaque eius nihil id
-      numquam impedit fugiat! Enim voluptatibus sed itaque repellat ullam.
-      Labore dolor voluptas, quaerat sint saepe doloribus earum eos modi fugiat
-      ea iusto error quo quibusdam, repellat sunt non veniam temporibus dolorum
-      ratione consectetur quis libero? Eveniet sit quaerat libero. Molestiae in
-      tempore quidem, nostrum consequatur est deserunt saepe animi dolor
-      eveniet, minus ad, ipsum asperiores impedit natus inventore error qui
-      optio! Minima tenetur tempora itaque natus cum recusandae ipsam! Quidem
-      explicabo architecto quo facere officia modi, facilis voluptas nam labore
-      consequuntur, quisquam magnam consequatur eius vel accusamus perspiciatis
-      accusantium natus necessitatibus reiciendis. Illo eum autem at.
-      Laudantium, quos illo. Dicta veritatis eius provident, temporibus, nihil
-      iste sit tempora modi totam minima placeat adipisci libero natus cumque,
-      accusamus nemo tenetur ducimus consequuntur a obcaecati praesentium esse
-      inventore aperiam! Quae, obcaecati. Doloremque quae voluptatibus sapiente
-      deserunt. Explicabo accusamus vel molestias nisi quas cupiditate error
-      iste quibusdam debitis qui, aliquid rem quo perferendis tempora
-      voluptatum? Necessitatibus, eaque distinctio ea qui nobis provident!
-      Numquam porro, assumenda rem, ea quod sed aperiam saepe nemo amet quas
-      laudantium quo tempora sit perferendis at. Aperiam, dolores officia. Quis
-      ratione recusandae eius similique reiciendis doloribus cupiditate
-      incidunt. Illum facilis ad suscipit tenetur mollitia veniam facere officia
-      atque cupiditate iure natus vero nihil ipsa alias nisi, ex incidunt
-      repellendus voluptates libero repudiandae quia delectus. Delectus cum
-      tempore quisquam? Doloremque numquam libero nulla. Qui, asperiores ducimus
-      debitis ex fugiat aperiam sequi. Doloribus cupiditate maxime nisi, ipsum
-      velit, natus dolor doloremque iusto voluptatum officiis quaerat at minima
-      accusamus harum eius. Unde, culpa amet? Obcaecati veritatis unde, ad odit
-      nam ducimus officia minima voluptates tempore non in dicta quasi saepe
-      modi quia. Corporis totam officiis saepe alias porro fugiat eum ab?
+    <div className="contact-container">
+      <div className="contact-header">
+        <MessageSquare className="header-icon" />
+        <h1>Get in Touch</h1>
+      </div>
+
+      <div className="contact-content">
+        {/* Contact Form */}
+        <div className="contact-form-container">
+          <div className="card">
+            <h2>Send me a message</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="subject"
+                  placeholder="Subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <textarea
+                  name="message"
+                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" className="submit-btn">
+                <Send className="btn-icon" />
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {/* Contact Information */}
+        <div className="contact-info-container">
+          <div className="card">
+            <h2>Contact Information</h2>
+            <div className="info-list">
+              {contactInfo.map((info, index) => (
+                <a key={index} href={info.link} className="info-item">
+                  <div className="info-icon">{info.icon}</div>
+                  <div className="info-content">
+                    <h3>{info.title}</h3>
+                    <p>{info.value}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="card social-card">
+            <h2>Connect with Me</h2>
+            <div className="social-links">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label={social.label}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        .contact-container {
+          min-height: 100vh;
+          padding: 2rem;
+          background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%);
+        }
+
+        .contact-header {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 2rem;
+        }
+
+        .header-icon {
+          width: 2rem;
+          height: 2rem;
+          color: #0288d1;
+        }
+
+        h1 {
+          font-size: 2.5rem;
+          color: #1a237e;
+          margin: 0;
+        }
+
+        .contact-content {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+          .contact-content {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+
+        .card {
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          border-radius: 1rem;
+          padding: 2rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease;
+          margin-bottom: 2rem;
+        }
+
+        .card:hover {
+          transform: translateY(-5px);
+        }
+
+        h2 {
+          font-size: 1.5rem;
+          color: #1a237e;
+          margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+          margin-bottom: 1.5rem;
+        }
+
+        input,
+        textarea {
+          width: 100%;
+          padding: 0.75rem;
+          border: 2px solid #e0e0e0;
+          border-radius: 0.5rem;
+          font-size: 1rem;
+          transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+          outline: none;
+          border-color: #0288d1;
+        }
+
+        textarea {
+          min-height: 150px;
+          resize: vertical;
+        }
+
+        .submit-btn {
+          width: 100%;
+          padding: 1rem;
+          background: #0288d1;
+          color: white;
+          border: none;
+          border-radius: 0.5rem;
+          font-size: 1rem;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+          background: #01579b;
+        }
+
+        .btn-icon {
+          width: 1.2rem;
+          height: 1.2rem;
+        }
+
+        .info-list {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .info-item {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 1rem;
+          border-radius: 0.5rem;
+          text-decoration: none;
+          color: inherit;
+          transition: background 0.3s ease;
+        }
+
+        .info-item:hover {
+          background: rgba(2, 136, 209, 0.1);
+        }
+
+        .info-icon {
+          background: rgba(2, 136, 209, 0.1);
+          padding: 0.75rem;
+          border-radius: 0.5rem;
+          color: #0288d1;
+        }
+
+        .info-content h3 {
+          margin: 0;
+          font-size: 1.1rem;
+          color: #1a237e;
+        }
+
+        .info-content p {
+          margin: 0.25rem 0 0;
+          color: #666;
+        }
+
+        .social-links {
+          display: flex;
+          gap: 1rem;
+        }
+
+        .social-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 2.5rem;
+          height: 2.5rem;
+          background: rgba(2, 136, 209, 0.1);
+          color: #0288d1;
+          border-radius: 0.5rem;
+          transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+          background: #0288d1;
+          color: white;
+          transform: translateY(-3px);
+        }
+      `}</style>
     </div>
   );
 };
