@@ -1,4 +1,5 @@
 "use client";
+
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import {
   Mail,
@@ -18,6 +19,10 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+
+  const [submittedData, setSubmittedData] = useState<null | typeof formData>(
+    null
+  );
 
   const contactInfo = [
     {
@@ -66,7 +71,12 @@ const Contact = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Thank you, your data was submitted sucessfully!!!");
+    console.log("Form Data:", formData);
+    // Simulating a successful submission
+    setTimeout(() => {
+      setSubmittedData(formData);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    }, 1000);
   };
 
   return (
@@ -127,6 +137,23 @@ const Contact = () => {
               </button>
             </form>
           </div>
+          {submittedData && (
+            <div className="card submitted-data">
+              <h2>Submitted Data</h2>
+              <p>
+                <strong>Name:</strong> {submittedData.name}
+              </p>
+              <p>
+                <strong>Email:</strong> {submittedData.email}
+              </p>
+              <p>
+                <strong>Subject:</strong> {submittedData.subject}
+              </p>
+              <p>
+                <strong>Message:</strong> {submittedData.message}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Contact Information */}
@@ -336,6 +363,14 @@ const Contact = () => {
           background: #0288d1;
           color: white;
           transform: translateY(-3px);
+        }
+
+        .submitted-data {
+          margin-top: 2rem;
+        }
+
+        .submitted-data p {
+          margin-bottom: 0.5rem;
         }
       `}</style>
     </div>
